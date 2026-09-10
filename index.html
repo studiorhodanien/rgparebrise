@@ -692,7 +692,7 @@
       <a class="tel-link" href="tel:+33623536186">
         06 23 53 61 86
       </a>
-      <a class="btn btn-rouge" href="mailto:Rgparebrise.contact@gmail.com?subject=Demande%20de%20devis%20gratuit%20%E2%80%93%20RG%20Pare-Brise&body=Bonjour%2C%0A%0AJe%20souhaite%20obtenir%20un%20devis%20gratuit%20pour%20mon%20v%C3%A9hicule.%0A%0ANom%20%3A%0AT%C3%A9l%C3%A9phone%20%3A%0AV%C3%A9hicule%20%3A%0AImmatriculation%20%3A%0APrestation%20souhait%C3%A9e%20%3A%0A%0AMerci.">Devis gratuit</a>
+      <a class="btn btn-rouge" href="#" onclick="openEmailChooser(event)">Devis gratuit</a>
     </div>
   </div>
 </header>
@@ -979,12 +979,63 @@
   </div>
 </footer>
 
+<!-- ================= CHOIX DE LA MESSAGERIE ================= -->
+<div class="email-chooser" id="emailChooser" aria-hidden="true">
+  <div class="email-chooser__backdrop" onclick="closeEmailChooser()"></div>
+  <div class="email-chooser__box" role="dialog" aria-modal="true" aria-labelledby="emailChooserTitle">
+    <button class="email-chooser__close" type="button" onclick="closeEmailChooser()" aria-label="Fermer">×</button>
+    <p class="eyebrow">Demande de devis</p>
+    <h2 id="emailChooserTitle">Choisissez votre messagerie</h2>
+    <p>Vous pouvez utiliser Gmail, Outlook, Orange, SFR ou votre messagerie habituelle.</p>
+    <div class="email-chooser__grid">
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=Rgparebrise.contact@gmail.com&su=Demande%20de%20devis%20gratuit%20%E2%80%93%20RG%20Pare-Brise&body=Bonjour%2C%0A%0AJe%20souhaite%20obtenir%20un%20devis%20gratuit%20pour%20mon%20v%C3%A9hicule.%0A%0ANom%20%3A%0AT%C3%A9l%C3%A9phone%20%3A%0AV%C3%A9hicule%20%3A%0AImmatriculation%20%3A%0APrestation%20souhait%C3%A9e%20%3A%0A%0AMerci." target="_blank" rel="noopener">Gmail</a>
+      <a href="https://outlook.live.com/mail/0/deeplink/compose?to=Rgparebrise.contact@gmail.com&subject=Demande%20de%20devis%20gratuit%20%E2%80%93%20RG%20Pare-Brise&body=Bonjour%2C%0A%0AJe%20souhaite%20obtenir%20un%20devis%20gratuit%20pour%20mon%20v%C3%A9hicule.%0A%0ANom%20%3A%0AT%C3%A9l%C3%A9phone%20%3A%0AV%C3%A9hicule%20%3A%0AImmatriculation%20%3A%0APrestation%20souhait%C3%A9e%20%3A%0A%0AMerci." target="_blank" rel="noopener">Outlook</a>
+      <a href="https://mail.orange.fr/" target="_blank" rel="noopener">Orange Mail</a>
+      <a href="https://webmail.sfr.fr/" target="_blank" rel="noopener">SFR Mail</a>
+      <a href="https://mail.yahoo.com/" target="_blank" rel="noopener">Yahoo Mail</a>
+      <a href="https://www.icloud.com/mail/" target="_blank" rel="noopener">iCloud Mail</a>
+      <a class="email-chooser__other" href="mailto:Rgparebrise.contact@gmail.com?subject=Demande%20de%20devis%20gratuit%20%E2%80%93%20RG%20Pare-Brise&body=Bonjour%2C%0A%0AJe%20souhaite%20obtenir%20un%20devis%20gratuit%20pour%20mon%20v%C3%A9hicule.%0A%0ANom%20%3A%0AT%C3%A9l%C3%A9phone%20%3A%0AV%C3%A9hicule%20%3A%0AImmatriculation%20%3A%0APrestation%20souhait%C3%A9e%20%3A%0A%0AMerci.">Autre messagerie / application</a>
+    </div>
+  </div>
+</div>
+
+<style>
+.email-chooser{display:none;position:fixed;inset:0;z-index:100;align-items:center;justify-content:center;padding:24px}
+.email-chooser.is-open{display:flex}
+.email-chooser__backdrop{position:absolute;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(4px)}
+.email-chooser__box{position:relative;z-index:1;width:min(620px,100%);background:#fff;padding:38px;border-top:4px solid var(--rouge);box-shadow:0 24px 80px rgba(0,0,0,.35)}
+.email-chooser__box h2{font-family:'Barlow Condensed',sans-serif;font-size:38px;line-height:1;text-transform:uppercase;margin-top:12px}
+.email-chooser__box>p:not(.eyebrow){color:var(--texte-doux);margin-top:12px}
+.email-chooser__close{position:absolute;right:14px;top:8px;border:0;background:none;font-size:34px;line-height:1;cursor:pointer;color:var(--noir)}
+.email-chooser__grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:26px}
+.email-chooser__grid a{display:flex;align-items:center;justify-content:center;min-height:52px;padding:12px 16px;background:var(--noir);color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;text-transform:uppercase;letter-spacing:.02em;border:2px solid var(--noir);transition:.2s}
+.email-chooser__grid a:hover{background:var(--rouge);border-color:var(--rouge)}
+.email-chooser__grid .email-chooser__other{grid-column:1/-1;background:#fff;color:var(--noir);border-color:var(--noir)}
+.email-chooser__grid .email-chooser__other:hover{background:var(--noir);color:#fff}
+@media(max-width:600px){.email-chooser__box{padding:32px 22px}.email-chooser__grid{grid-template-columns:1fr}.email-chooser__grid .email-chooser__other{grid-column:auto}}
+</style>
+
 <!-- ================= BOUTON FLOTTANT MOBILE ================= -->
 <div class="mobile-call">
   <a href="tel:+33623536186">📞 Appeler maintenant</a>
 </div>
 
 <script>
+  function openEmailChooser(e){
+    if(e) e.preventDefault();
+    const chooser = document.getElementById('emailChooser');
+    chooser.classList.add('is-open');
+    chooser.setAttribute('aria-hidden','false');
+    document.body.style.overflow='hidden';
+  }
+  function closeEmailChooser(){
+    const chooser = document.getElementById('emailChooser');
+    chooser.classList.remove('is-open');
+    chooser.setAttribute('aria-hidden','true');
+    document.body.style.overflow='';
+  }
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeEmailChooser(); });
+
   document.getElementById('year').textContent = new Date().getFullYear();
 
   // Reveal au scroll
